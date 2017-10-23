@@ -17,7 +17,7 @@ module.exports = (app, passport) => {
         let post = new Post(body);
 
         post.save().then((post) => {
-            res.send(post);
+            res.redirect('/');
         }).catch((e) => {
             res.status(400).send(e);
         });
