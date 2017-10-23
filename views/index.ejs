@@ -1,0 +1,18 @@
+<html>
+    <head>
+        <title>Node Blog</title>
+    </head>
+    <body>
+        <h1>Node Blog</h1>
+        <% for(var i=0; i< posts.length; i++) {%>
+            <li>
+            <span><%= i %></span>            
+            <span><%= posts[i].title %></span>
+            <span><%= posts[i].img %></span>
+            <span><%= posts[i].text %></span>
+            <span><%= posts[i].date %></span>
+            <span><%= posts[i]._id %></span>
+            </li>
+        <% } %>
+    </body>
+</html>

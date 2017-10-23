@@ -20,3 +20,5 @@ let Post = mongoose.model('Post', {
         default: Date.now
     }
 });
+
+module.exports = {Post};
