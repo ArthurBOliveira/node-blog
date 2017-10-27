@@ -6,15 +6,17 @@ let {
 
 module.exports = (app, filePath, cloudinary) => {
     app.get('/', (req, res) => {
-        Post.find().sort({
-            date: -1
-        }).then((posts) => {
-            res.render('index.ejs', {
-                posts
-            });
-        }, (e) => {
-            res.status(400).send(e);
-        });
+        // Post.find().sort({
+        //     date: -1
+        // }).then((posts) => {
+        //     res.render('index.ejs', {
+        //         posts
+        //     });
+        // }, (e) => {
+        //     res.status(400).send(e);
+        // });
+
+        res.render('index.ejs');
     });
 
     app.get('/admin', (req, res) => {
@@ -22,6 +24,15 @@ module.exports = (app, filePath, cloudinary) => {
             res.render('admin.ejs', {
                 posts
             });
+        }, (e) => {
+            res.status(400).send(e);
+        });
+    });
+
+    app.get('/posts', (req, res) => {
+        Post.find().sort({date: -1}).then((posts) => {
+            console.log(posts);
+            res.send({posts});
         }, (e) => {
             res.status(400).send(e);
         });

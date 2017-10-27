@@ -43,9 +43,6 @@
             <a class="nav-link" href="about.html">About</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="post.html">Sample Post</a>
-          </li>
-          <li class="nav-item">
             <a class="nav-link" href="contact.html">Contact</a>
           </li>
         </ul>
@@ -71,25 +68,12 @@
   <div class="container">
     <div class="row">
       <div class="col-lg-8 col-md-10 mx-auto">
-        <% for(var i=0; i< posts.length; i++) {%>
-          <div class="post-preview">
-            <a href="post.html">
-              <h2 class="post-title">
-                  <%= posts[i].title %>
-              </h2>
-              <img style="width: 100%;" src="<%= posts[i].img %>"/>
-              <h3 class="post-subtitle">
-                  <%= posts[i].subTitle %>
-              </h3>
-            </a>
-            <p class="post-meta"><%= posts[i].date %></p>
-          </div>
-          <% } %>
-            <hr>
-            <!-- Pager -->
-            <div class="clearfix">
-              <a class="btn btn-secondary float-right" href="#">Older Posts &rarr;</a>
-            </div>
+        <hr />
+        <hr />
+        <hr />
+        <hr />
+        <hr />
+        <hr />
       </div>
     </div>
   </div>
@@ -133,12 +117,37 @@
     </div>
   </footer>
 
+  <!-- Templates -->
+  <script id="post-template" type="text/template">
+    <div class="post-preview">
+      <a href="post.html">
+        <h2 class="post-title">
+          {{title}}
+        </h2>
+        <img style="width: 100%;" src="{{img}}" />
+        <h3 class="post-subtitle">
+          {{subTitle}}
+        </h3>
+      </a>
+      <p class="post-meta">
+        {{date}}
+      </p>
+    </div>
+  </script>
+
+  <!-- CDN -->  
+  <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/2.3.0/mustache.min.js"></script>  
+
+
   <!-- Bootstrap core JavaScript -->
-  <script src="/vendor/jquery/jquery.min.js"></script>
-  <script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script type="text/javascript" src="/vendor/jquery/jquery.min.js"></script>
+  <script type="text/javascript" src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
   <!-- Custom scripts for this template -->
-  <script src="/js/clean-blog.min.js"></script>
+  <script type="text/javascript" src="/js/jquery.endless-scroll.js"></script>
+  <script type="text/javascript" src="/js/clean-blog.min.js"></script>
+  <script type="text/javascript" src="/js/index.js"></script>
 
 </body>
 
