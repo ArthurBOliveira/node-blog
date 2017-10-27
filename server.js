@@ -4,6 +4,7 @@ const bodyParser = require('body-parser');
 const path = require('path');
 
 let {mongoose} = require('./server/db/mongoose');
+let {cloudinary} = require('./server/cloudinary/cloudinary');
 
 let app = express();
 const port = process.env.PORT || 3000;
@@ -17,7 +18,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.set('view engine', 'ejs');
 app.use(fileUpload());
 
-require('./server/routes/routes.js')(app, filePath);
+require('./server/routes/routes.js')(app, filePath, cloudinary);
 
 app.listen(port, () => {
     console.log('Server on Port: ' + port);

@@ -4,7 +4,7 @@ let {
     Post
 } = require('./../models/post');
 
-module.exports = (app, filePath) => {
+module.exports = (app, filePath, cloudinary) => {
     app.get('/', (req, res) => {
         Post.find().sort({
             date: -1
@@ -32,33 +32,24 @@ module.exports = (app, filePath) => {
         let file = req.files.file;
         let post = new Post(body);
 
+        let localPath = filePath + '/' + file.name;
+
         file.mv(filePath + '/' + file.name, (err) => {
             if (err) return res.status(500).send(err);
-        });        
-
-        post.img = '/files/' + file.name;
-
-        post.save().then((post) => {
-            res.render('admin.ejs', {
-                posts
-            });
-        }).catch((e) => {
-            res.status(400).send(e);
         });
-    });
 
-    app.post('/upload', (req, res) => {
-        if (!req.files)
-            return res.status(400).send('No files were uploaded.');
+        cloudinary.uploader.upload(localPath, (result) => {
+            console.log(result.secure_url);
 
-        // The name of the input field (i.e. "sampleFile") is used to retrieve the uploaded file
-        let sampleFile = req.files.sampleFile;
+            post.img = result.secure_url;
 
-        // Use the mv() method to place the file somewhere on your server
-        sampleFile.mv(filePath + '/' + sampleFile.name, (err) => {
-            if (err) return res.status(500).send(err);
-
-            res.send('File uploaded!');
+            post.save().then((post) => {
+                res.render('admin.ejs', {
+                    posts
+                });
+            }).catch((e) => {
+                res.status(400).send(e);
+            });
         });
     });
 };
