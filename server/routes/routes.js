@@ -4,9 +4,11 @@ let {
     Post
 } = require('./../models/post');
 
-module.exports = (app, passport) => {
+module.exports = (app, filePath) => {
     app.get('/', (req, res) => {
-        Post.find().sort({date: -1}).then((posts) => {
+        Post.find().sort({
+            date: -1
+        }).then((posts) => {
             res.render('index.ejs', {
                 posts
             });
@@ -25,10 +27,16 @@ module.exports = (app, passport) => {
         });
     });
 
-    //#region Posts
     app.post('/post', (req, res) => {
-        let body = _.pick(req.body, ['title', 'subTitle', 'text', 'img']);
+        let body = _.pick(req.body, ['title', 'subTitle', 'text']);
+        let file = req.files.file;
         let post = new Post(body);
+
+        file.mv(filePath + '/' + file.name, (err) => {
+            if (err) return res.status(500).send(err);
+        });        
+
+        post.img = '/files/' + file.name;
 
         post.save().then((post) => {
             res.render('admin.ejs', {
@@ -38,5 +46,19 @@ module.exports = (app, passport) => {
             res.status(400).send(e);
         });
     });
-    //#endregion
+
+    app.post('/upload', (req, res) => {
+        if (!req.files)
+            return res.status(400).send('No files were uploaded.');
+
+        // The name of the input field (i.e. "sampleFile") is used to retrieve the uploaded file
+        let sampleFile = req.files.sampleFile;
+
+        // Use the mv() method to place the file somewhere on your server
+        sampleFile.mv(filePath + '/' + sampleFile.name, (err) => {
+            if (err) return res.status(500).send(err);
+
+            res.send('File uploaded!');
+        });
+    });
 };

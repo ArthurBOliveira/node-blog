@@ -37,12 +37,22 @@
             <div>
                 <h2>Create a Post</h2>
 
-                <form action="/post" method="POST">
+                <form action="/post" method="POST" encType="multipart/form-data">
                     <input type="text" placeholder="Title" name="title">
                     <input type="text" placeholder="SubTitle" name="subTitle">
                     <input type="text" placeholder="Text" name="text">
-                    <input type="text" placeholder="Img" name="img">
+                    <!-- <input type="text" placeholder="Img" name="img"> -->
+                    <input type="file" name="file" />
                     <button type="submit">Submit</button>
+                </form>
+            </div>
+
+            <hr/>
+
+            <div>
+                <form ref='uploadForm' id='uploadForm' action='/upload' method='post' encType="multipart/form-data">
+                    
+                    <input type='submit' value='Upload!' />
                 </form>
             </div>
 </body>
