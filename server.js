@@ -6,7 +6,7 @@ let {mongoose} = require('./server/db/mongoose');
 
 let app = express();
 const port = process.env.PORT || 3000;
-const publicPath = path.join(__dirname, '/public');
+const publicPath = path.join(__dirname, '/views');
 
 app.use(bodyParser.json());
 app.use(express.static(publicPath));

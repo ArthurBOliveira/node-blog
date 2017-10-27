@@ -1,0 +1,50 @@
+<html>
+
+<head>
+    <title>Admin</title>
+</head>
+
+<body>
+    <h1>Admin</h1>
+    <% for(var i=0; i< posts.length; i++) {%>
+        <li>
+            <span>
+                <%= i %>
+            </span>
+            <span>
+                <%= posts[i].title %>
+            </span>
+            <span>
+                <%= posts[i].subTitle %>
+            </span>
+            <span>
+                <%= posts[i].img %>
+            </span>
+            <span>
+                <%= posts[i].text %>
+            </span>
+            <span>
+                <%= posts[i].date %>
+            </span>
+            <span>
+                <%= posts[i]._id %>
+            </span>
+        </li>
+        <% } %>
+
+            <hr/>
+
+            <div>
+                <h2>Create a Post</h2>
+
+                <form action="/post" method="POST">
+                    <input type="text" placeholder="Title" name="title">
+                    <input type="text" placeholder="SubTitle" name="subTitle">
+                    <input type="text" placeholder="Text" name="text">
+                    <input type="text" placeholder="Img" name="img">
+                    <button type="submit">Submit</button>
+                </form>
+            </div>
+</body>
+
+</html>
