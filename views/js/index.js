@@ -1,28 +1,32 @@
-$(document).ready(function () {
+$(function () {
     $(window).endlessScroll({
-        inflowPixels: 300,
-        callback: function () {
-            // $.ajax({
-            //     url: "/posts",
-            //     context: document.body
-            // }).done(function (result) {
-            //     console.log(result);
-            // });
-
-            // $.ajax({url: "demo_test.txt", success: function(result){
-            //     $("#div1").html(result);
-            // }});
-
+        inflowPixels: 100,
+        fireOnce: false,
+        fireDelay: false,
+        ceaseFireOnEmpty: false,
+        loader: '<div class="loading"><div>',
+        callback: function (fireSequence) {
             $.ajax({
                 type: 'GET',
-                url: '/posts',
+                url: '/posts/' + fireSequence,
                 success: function (result) {
                     console.log(result);
+                    let template = $('#post-template').html();
+
+                    for (let i = 0; i < result.posts.length; i++) {
+                        let html = Mustache.render(template, {
+                            title: result.posts[i].title,
+                            subTitle: result.posts[i].subTitle,
+                            img: result.posts[i].img,
+                            date: result.posts[i].date
+                        });
+
+                        $('#posts-container').append(html);
+                    }
+
+                    return 0;
                 }
             });
-
-            // var $img = $('#images li:nth-last-child(5)').clone();
-            // $('#images').append($img);
         }
     });
 });
