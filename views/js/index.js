@@ -5,7 +5,9 @@ $(function () {
         fireDelay: false,
         ceaseFireOnEmpty: false,
         loader: '<div class="loading"><div>',
-        callback: function (fireSequence) {
+        callback: function (fireSequence, scrollDirection) {
+            if(scrollDirection === 'prev') return;
+
             $.ajax({
                 type: 'GET',
                 url: '/posts/' + fireSequence,
