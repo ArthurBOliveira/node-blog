@@ -30,10 +30,10 @@ module.exports = (app, filePath, cloudinary) => {
     });
 
     app.get('/posts/:page', (req, res) => {
-        let page = parseInt(req.params.page) - 1;
+        let page = parseInt(req.params.page);
         console.log(page);
         
-        Post.find().limit(1).skip(page).sort({date: -1}).then((posts) => {
+        Post.find().limit(5).skip(page).sort({date: -1}).then((posts) => {
             console.log(posts);
             res.send({posts});
         }, (e) => {
