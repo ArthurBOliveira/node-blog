@@ -35,7 +35,7 @@
   <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
     <div class="container">
       <a class="navbar-brand" href="/">Blog da Bia!</a>
-      <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive"
+      <!-- <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive"
         aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
         Menu
         <i class="fa fa-bars"></i>
@@ -52,7 +52,7 @@
             <a class="nav-link" href="contact.html">Contact</a>
           </li>
         </ul>
-      </div>
+      </div> -->
     </div>
   </nav>
 
@@ -74,6 +74,22 @@
   <div class="container">
     <div class="row">
       <div id="posts-container" class="col-lg-8 col-md-10 mx-auto">
+        <% for(var i=0; i< posts.length; i++) {%>
+          <div class="post-preview">
+              <!-- <a href="post.html"> -->
+                <h2 class="post-title">
+                  <%= posts[i].title %>
+                </h2>
+                <img style="width: 100%;" src="<%= posts[i].img %>" />
+                <h3 class="post-subTitle">
+                    <%= posts[i].subTitle %>
+                </h3>
+              <!-- </a> -->
+              <p class="post-meta">
+                  <%= posts[i].date %>
+              </p>
+            </div>
+        <% } %>
       </div>
     </div>
   </div>
@@ -125,7 +141,7 @@
           {{title}}
         </h2>
         <img style="width: 100%;" src="{{img}}" />
-        <h3 class="post-subtitle">
+        <h3 class="post-subTitle">
           {{subTitle}}
         </h3>
       </a>
@@ -135,13 +151,13 @@
     </div>
   </script>
 
-  <!-- CDN -->  
+  <!-- CDN -->
   <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/2.3.0/mustache.min.js"></script>  
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/2.3.0/mustache.min.js"></script>
 
 
   <!-- Bootstrap core JavaScript -->
-  <script type="text/javascript" src="/vendor/jquery/jquery.min.js"></script>
+  <!-- <script type="text/javascript" src="/vendor/jquery/jquery.min.js"></script> -->
   <script type="text/javascript" src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
   <!-- Custom scripts for this template -->

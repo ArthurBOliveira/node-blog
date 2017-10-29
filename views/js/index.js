@@ -1,19 +1,25 @@
 $(function () {
+    var isEmpty = false;
+
     $(window).endlessScroll({
         inflowPixels: 100,
-        fireOnce: false,
+        fireOnce: true,
         fireDelay: false,
         ceaseFireOnEmpty: false,
         loader: '<div class="loading"><div>',
+        ceaseFire: function() { return isEmpty; }, 
         callback: function (fireSequence, pageSequence) {
             if (pageSequence > 0) {
-                console.log(pageSequence);
+                fireSequence += 5;
+                console.log(fireSequence);
                 
                 $.ajax({
                     type: 'GET',
                     url: '/posts/' + fireSequence,
                     success: function (result) {
                         let template = $('#post-template').html();
+
+                        isEmpty = result.posts.length === 0 ? true : false;
 
                         for (let i = 0; i < result.posts.length; i++) {
                             let html = Mustache.render(template, {

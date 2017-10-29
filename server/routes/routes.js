@@ -6,17 +6,15 @@ let {
 
 module.exports = (app, filePath, cloudinary) => {
     app.get('/', (req, res) => {
-        // Post.find().sort({
-        //     date: -1
-        // }).then((posts) => {
-        //     res.render('index.ejs', {
-        //         posts
-        //     });
-        // }, (e) => {
-        //     res.status(400).send(e);
-        // });
-
-        res.render('index.ejs');
+        Post.find().limit(5).sort({
+            date: -1
+        }).then((posts) => {
+            res.render('index.ejs', {
+                posts
+            });
+        }, (e) => {
+            res.status(400).send(e);
+        });
     });
 
     app.get('/admin', (req, res) => {
@@ -43,8 +41,10 @@ module.exports = (app, filePath, cloudinary) => {
 
     app.post('/post', (req, res) => {
         let body = _.pick(req.body, ['title', 'subTitle', 'text']);
-        let file = req.files.file;
+        let file = req.files.img;
         let post = new Post(body);
+
+        console.log(file);
 
         let localPath = filePath + '/' + file.name;
 
@@ -56,11 +56,10 @@ module.exports = (app, filePath, cloudinary) => {
             console.log(result.secure_url);
 
             post.img = result.secure_url;
+            console.log(post);
 
             post.save().then((post) => {
-                res.render('admin.ejs', {
-                    posts
-                });
+                res.send(post);
             }).catch((e) => {
                 res.status(400).send(e);
             });
