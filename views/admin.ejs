@@ -19,11 +19,11 @@
         <form id="post-form" action="/post" method="POST" encType="multipart/form-data">
             <input type="text" placeholder="Title" name="title" id="title">
             <input type="text" placeholder="Sub Title" name="subTitle" id="subTitle">
-            <input type="text" placeholder="Text" name="text" id="text">
-            <input type="file" name="img" id="img" />
+            <textarea placeholder="Text" name="text" id="text" form="post-form"></textarea>
+            <input type="file" name="img" id="img" />            
             <span id="status"></span>
             <button id="submit" type="submit">Submit</button>
-        </form>
+        </form>        
         <br />
     </div>
 

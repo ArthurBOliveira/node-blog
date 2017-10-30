@@ -75,21 +75,19 @@
     <div class="row">
       <div id="posts-container" class="col-lg-8 col-md-10 mx-auto">
         <% for(var i=0; i< posts.length; i++) {%>
-          <div class="post-preview">
-              <!-- <a href="post.html"> -->
-                <h2 class="post-title">
-                  <%= posts[i].title %>
-                </h2>
-                <img style="width: 100%;" src="<%= posts[i].img %>" />
-                <h3 class="post-subTitle">
-                    <%= posts[i].subTitle %>
-                </h3>
-              <!-- </a> -->
-              <p class="post-meta">
-                  <%= posts[i].date %>
-              </p>
-            </div>
-        <% } %>
+          <div class="post-preview" style="cursor: pointer;" href="#<%= posts[i]._id %>" data-toggle="modal">
+            <h2 class="post-title">
+              <%= posts[i].title %>
+            </h2>
+            <img class="img-fluid img-centered" src="<%= posts[i].img %>" alt="<%= posts[i].title %>" />
+            <h3 class="post-subTitle">
+              <%= posts[i].subTitle %>
+            </h3>
+            <p class="post-meta">
+              <%= moment(posts[i].date).format('D/MMM/YY - h:mm a') %>
+            </p>
+          </div>
+          <% } %>
       </div>
     </div>
   </div>
@@ -135,21 +133,103 @@
 
   <!-- Templates -->
   <script id="post-template" type="text/template">
-    <div class="post-preview">
-      <a href="post.html">
+    <div class="post-preview" style="cursor: pointer;" href="#{{_id}}" data-toggle="modal">
         <h2 class="post-title">
           {{title}}
         </h2>
-        <img style="width: 100%;" src="{{img}}" />
+        <img class="img-fluid img-centered" src="{{img}}" alt="{{img}}" />
         <h3 class="post-subTitle">
           {{subTitle}}
         </h3>
-      </a>
       <p class="post-meta">
         {{date}}
       </p>
     </div>
   </script>
+  <script id="modal-template" type="text/template">
+    <div class="portfolio-modal modal fade" id="{{_id}}" tabindex="-1" role="dialog" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="close-modal" data-dismiss="modal">
+            <div class="lr">
+              <div class="rl"></div>
+            </div>
+          </div>
+          <div class="container">
+            <div class="row">
+              <div class="col-lg-8 mx-auto">
+                <div class="modal-body">
+                  <h2>
+                    {{title}}
+                  </h2>
+                  <!-- <hr /> -->
+                  <img class="img-fluid img-centered" src="{{img}}" alt="{{title}}">
+                  <p>
+                    {{text}}
+                  </p>
+                  <ul class="list-inline item-details">
+                    <li>
+                      <strong>
+                          {{date}}
+                      </strong>
+                    </li>
+                  </ul>
+                  <button class="btn btn-success" type="button" data-dismiss="modal">
+                    <i class="fa fa-times"></i>
+                    Close
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </script>
+
+  <!-- Modals -->
+  <div id="Modals">
+    <% for(var i=0; i< posts.length; i++) {%>
+      <div class="portfolio-modal modal fade" id="<%= posts[i]._id %>" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="close-modal" data-dismiss="modal">
+              <div class="lr">
+                <div class="rl"></div>
+              </div>
+            </div>
+            <div class="container">
+              <div class="row">
+                <div class="col-lg-8 mx-auto">
+                  <div class="modal-body">
+                    <h2>
+                      <%= posts[i].title %>
+                    </h2>
+                    <!-- <hr /> -->
+                    <img class="img-fluid img-centered" src="<%= posts[i].img %>" alt="<%= posts[i].title %>">
+                    <p>
+                      <%= posts[i].text%>
+                    </p>
+                    <ul class="list-inline item-details">
+                      <li>
+                        <strong>
+                          <%= moment(posts[i].date).format('D/MMM/YY - h:mm a') %>
+                        </strong>
+                      </li>
+                    </ul>
+                    <button class="btn btn-success" type="button" data-dismiss="modal">
+                      <i class="fa fa-times"></i>
+                      Close
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <% } %>
+  </div>
 
   <!-- CDN -->
   <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
@@ -163,6 +243,7 @@
   <!-- Custom scripts for this template -->
   <script type="text/javascript" src="/js/jquery.endless-scroll.js"></script>
   <script type="text/javascript" src="/js/clean-blog.min.js"></script>
+  <script type="text/javascript" src="/js/moment.js"></script>
   <script type="text/javascript" src="/js/index.js"></script>
 
 </body>

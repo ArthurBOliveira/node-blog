@@ -1,5 +1,7 @@
 const _ = require('lodash');
 
+let moment = require('./../../views/js/moment');
+
 let {
     Post
 } = require('./../models/post');
@@ -10,7 +12,7 @@ module.exports = (app, filePath, cloudinary) => {
             date: -1
         }).then((posts) => {
             res.render('index.ejs', {
-                posts
+                posts, moment
             });
         }, (e) => {
             res.status(400).send(e);
